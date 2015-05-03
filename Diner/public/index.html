@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>diner toTto</title>
+	<link rel = "stylesheet" type = "text/css" href = "css/style.css" />
+	<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<header>
+	<h1> <a href = "#"> diner totTo </a></h1>
+	afkjweajflkwefjwelkjfklewjajw
+</header>
+
+<div id = "home">
+	<a id = "sumoShow"> <h2> SUMO RULES </h2> </a>
+	<div id="sumoRules">
+		<p class ="sumoDiet">Don’t eat breakfast.  Sumo wrestlers never eat breakfast.  This is a great way to slow your metabolism way down and will definitely ensure over eating later in the day.</p>
+
+		<p class ="sumoDiet">Exercise on an empty stomach.  When you exercise without proper fueling, your metabolism will conserve every ounce of energy you have left to get you through the activity.  So you end up burning far less calories than you would have had you eaten prior to exercising.</p>
+
+		<p class ="sumoDiet">Eat only 1-2 meals each day.  Sumo wrestlers get up early, work out and then don’t eat until late in the day.  This way they will be starving and will eat anything they can grab and in enormous amounts.  This ensures a great calorie surplus and maximum weight gain.  When you eat a large amount of calories in one sitting, the body will use up what it can and then fill your extra energy reserves for later.  When your storage gets full, everything left over is stored directly as fat.</p>
+
+		<p class ="sumoDiet">Drink beer.  Sumo wrestlers drink large amounts of beer with their meals.   For a sumo wrestler, the bigger the belly the better!</p>
+
+		<p class ="sumoDiet">Eat out. Many studies have found that people eating in a restaurant will eat 40% more food and 30% more fat then they would if they were at home. Sumo wrestlers like to distract each other while eating to make sure they don't notice those "getting full" signals. They also always have someone else cook for them so they don't pay attention to fat or ingredients.</p>
+
+		<p class ="sumoDiet">Sleep after eating.  When they finish their large meals, the wrestlers will take a long nap.  Going to sleep on a full stomach forces the body to store most of the calories as fat because it doesn’t have the ability to metabolize large amounts of food while sleeping</p>
+
+	<div>
+
+<div>
+
+<div id = "contentArea">
+
+<div>
+
+
+<div id = "formHere">
+
+<ul id ="eventList">
+<ul>
+
+<ul id ="menuList">
+<ul>
+
+<script type ="text/template" id ="sumoTemplate">
+	<li><a href ="/#sumos/<%= sumo.id %>"><%= sumo.title %></a></li>
+</script>
+<script type="text/template" id = "showSumo">
+	<span class = "sumo"> 
+		<%= sumo.shikona %> from <%= sumo.hometown %> <br>
+		ranked as <%= sumo.rank %> has <%= sumo.decorItem %>
+	</span>
+</script>
+
+<script type="text/template" id = "addSumoForm">
+	<span class ="addSumo"> 
+	<input type = "text" id = "nSumo_shikona" placeholder ="ring name">
+	<select id="nSumo_rank">
+  		<option value="makuuchi">Makuuchi First</option> 
+  		<option value="juryo">Juryo Second </option>
+  		<option value="makushita">Makushita Third</option>
+  		<option value="sandanme">Sandanme Fouth</option>
+  		<option value="jonidan">Jonidan Fifth</option>
+  		<option value="jonokuchi" selected>Jonokuchi Last</option>
+	</select>
+	<input type = "number" id = "nSumo_weight" placeholder = "weight">
+	<button id = "addNewSumo"> add wrestler </button>
+	</span>
+</script>
+
+<script type="text/template" id = "editSumoForm">
+	<span class ="editSumo"> 
+	<input type = "text" id = "nSumo_shikona<%= sumo.id %>" value ="<%= sumo.shikona %>">
+	<select id="nSumo_rank<%= sumo.id %>">
+		<option value ="<%= sumo.rank %>"selected> same </option>
+  		<option value="makuuchi">Makuuchi First</option> 
+  		<option value="juryo">Juryo Second </option>
+  		<option value="makushita">Makushita Third</option>
+  		<option value="sandanme">Sandanme Fouth</option>
+  		<option value="jonidan">Jonidan Fifth</option>
+  		<option value="jonokuchi">Jonokuchi Last</option>
+	</select>
+	<input type = "number" id = "nSumo_weight<%= sumo.id %>" value = "<%= sumo.weight %>">
+	<button class = "updateButton">Update</button>
+	<p class ="errorMsg"> </p>
+	</span>
+</script>
+
+
+
+<script type = "text/template" id = "eventTemplate">
+	<li><a href = "/#events/<%= event.id %>"><%= event.theme %></a></li>
+</script>
+<script type = "text/template" id = "showevent">
+	<span class = "event">
+		<%= event.theme %> happened on <%= event.created_at %>
+		under the conditions of: <%= event.rule %>
+		<br><img src= '<%= event.pic_url %>'>  
+			<img src= '<%= event.space %>'>
+			<%= attendance.pplCount %> sumos attended ...
+		<a href = "/#events/<%= event.id %>/menus" id= "promptMenus"> we fixed up: </a>
+	</span>
+</script>
+
+<script type="text/template" id ="addEventForm">
+	<span class = "addEvent">
+	<input type = "text" id = "nEvent_theme"  placeholder= "event theme">
+	<input type = "text" id = "nEvent_rule"  placeholder= "event Rule">
+	<input type = "text" id = "nEvent_picUrl"  placeholder= "picture link">
+	<input type = "text" id = "nEvent_space"  placeholder= "space layout">
+	<input type = "text" id = "nEvent_pplCount"  placeholder= "maximum attendants">
+	<button id = "addNewEvent"> add event </button>
+	<p class ="errorMsg"> </p>
+	<span>
+</script>
+
+<script type="text/template" id ="editEventForm">
+	<span class = "editEvent">
+	<input type = "text" id = "nEvent_theme<%= event.id %>" value= "<%= event.theme %>">
+	<input type = "text" id = "nEvent_rule<%= event.id %>" value= "<%= event.rule %>">
+	<input type = "text" id = "nEvent_picUrl<%= event.id %>" value= "<%= event.pic_url %>">
+	<input type = "text" id = "nEvent_space<%= event.id %>" value= "<%= event.space %>">
+	<input type = "text" id = "nEvent_pplCount<%= event.id %>" value= "<%= event.pplCount %>">
+	<button class = "updateButton">Update</button>
+	<p class ="errorMsg"> </p>
+	<span>
+</script>
+
+
+
+
+<script type = "text/template" id = "menuTemplate">
+	<li><a href = "/#menus/<%= menu.id %>"><%= menu.tag%></a></li>
+</script>
+<script type = "text/template" id = "showMenu"> 
+	 <span class = "menu">
+	 	<h2><%= menu.tag %><h2> is about <%= menu.mood %> <br>
+	 	<img src= '<%= menu.img_url %>'>
+	 	composed by the following 
+	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
+	 </span>
+</script>
+
+<script type="text/template" id ="addMenuForm">
+	<span class = "addMenu">
+	<input type = "text" id = "nMenu_tag"  placeholder= "tag">
+	<input type = "text" id = "nMenu_mood"  placeholder= "describe mood">
+	<input type = "text" id = "nMenu_imgUrl"  placeholder= "inspiration image">
+	<button id = "addNewMenu"> add menu </button>
+	<p class ="errorMsg"> </p>
+	<span>
+</script>
+
+<script type="text/template" id ="editMenuForm">
+	<span class = "editMenu">
+	<input type = "text" id = "nMenu_tag<%= menu.id %>"  value= "<%= menu.tag %>">
+	<input type = "text" id = "nMenu_mood<%= menu.id %>"  value= "<%= menu.mood %>">
+	<input type = "text" id = "nMenu_imgUrl<%= menu.id %>"  value= "<%= menu.img_url %>">
+	<button class = "updateButton">Update</button>
+	<p class ="errorMsg"> </p>
+	<span>
+</script>
+
+
+
+<script type = "text/template" id = "dishTemplate" >
+	<li><a href = "/#dishes/<%= dish.id %>"><%= dish.name %></a></li>
+</script>
+<script type = "text/template" id= "showDish">
+	<span class = "dish">
+		<h3><%= dish.name %><h3>
+		<br><%= dish.texture %>
+		<br><%= dish.flavor %>
+	</span>
+</script>
+
+<script type="text/template" id ="addDishForm">
+	<span class = "addDish">
+	<input type = "text" id = "nDish_name" placeholder= "name">
+	<input type = "text" id = "nDish_texture" placeholder= "texture">
+	<input type = "text" id = "nDish_flavor" placeholder= "flavor">
+	<button id = "addNewDish"> add dish </button>
+	<p class ="errorMsg"> </p>
+	<span>
+</script>
+
+<script type="text/template" id ="editDishForm">
+	<span class = "editDish">
+	<input type = "text" id = "nDish_name<%= dish.id %>" value = "<%= dish.name %>">
+	<input type = "text" id = "nDish_texture<%= dish.id %>" value = "<%= dish.texture %>">
+	<input type = "text" id = "nDish_flavor<%= dish.id %>" value = "<%= dish.flavor %>">
+	<button class = "updateButton">Update</button>
+	<p class ="errorMsg"> </p>
+	<span>
+</script>
+
+</body>
+</html>
