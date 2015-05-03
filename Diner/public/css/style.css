@@ -1,15 +1,27 @@
 body{
-	background-image: url("http://www.gardeningknowhow.com/wp-content/uploads/2011/05/barrel-cactus1.jpg");
-	background-repeat: no-repeat;
-    background-position: center top;
 	font-family: 'Questrial', sans-serif;
-	text-align: center;
+	height: 100%
 }
 
 header{
-	color:blanchedalmond;
+	float: right;
+	text-align: right;
+	color:#3A5F0B;
+	box-sizing: border-box;
+	width: 30%;
+	position: relative;
 }
 
+.homeContent{
+	padding: 2em
+	float: center;
+	position: relative;
+	text-align: center;
+	background-image: url("http://www.gardeningknowhow.com/wp-content/uploads/2011/05/barrel-cactus1.jpg");
+	background-repeat: no-repeat;
+    background-position: center top;
+    box-sizing: border-box;
+}
 a{	
 	font-family: 'Quicksand', sans-serif;
 	text-decoration: none;
@@ -27,15 +39,32 @@ a:hover{
 }
 
 div#sumoRules{
-	margin-left: auto;
-    margin-right: auto;
-	width: 80%;
+	margin: auto;
+	padding: auto;
+	width: 65%;
 	color:blanchedalmond;
 	position:relative;
-	align:center;
-	box-sizing: border-box;
 }
 
 button{
 	border:none;
+}
+nav{
+	border-color: #ffffff;
+	border-style: solid;
+	border-width: .3em;
+	text-align: left;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+ul#navBar li{
+	display: inline-block;
+	padding:.3em;
+	margin: 0;
+
+}
+ul#navBar Img{
+	width: auto;
+	height: 5em;
 }
