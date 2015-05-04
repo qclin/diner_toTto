@@ -10,22 +10,29 @@ header{
 	box-sizing: border-box;
 	width: 30%;
 	position: relative;
+	margin: auto;
 }
 
-.homeContent{
+#homeContent{
 	padding: 2em
 	float: center;
 	position: relative;
 	text-align: center;
 	background-image: url("http://www.gardeningknowhow.com/wp-content/uploads/2011/05/barrel-cactus1.jpg");
-	background-repeat: no-repeat;
+	/*background-repeat: no-repeat;*/
     background-position: center top;
     box-sizing: border-box;
+}
+h1{
+
+}
+li{
+	list-style: none;
 }
 a{	
 	font-family: 'Quicksand', sans-serif;
 	text-decoration: none;
-	color:blanchedalmond;
+	color:#3A5F0B;
 }
 
 a:hover{

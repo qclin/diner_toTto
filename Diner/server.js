@@ -33,7 +33,7 @@ app.get('/categories/:id', function(req, res){
 });
 
 app.post('/categories', function(req, res){
-	db.run("INSERT INTO categories (name) VALUES (?)", req.body.name, function(err,row){
+	db.run("INSERT INTO categories (tag) VALUES (?)", req.body.tag, function(err,row){
 		if(err){
 			throw err;
 		}
@@ -49,7 +49,7 @@ app.post('/categories', function(req, res){
 
 app.put('/categories/:id', function(req, res){
 	var id = req.params.id
-	db.run("UPDATE categories SET name = ? WHERE id = ?", req.body.name, id, function(err){
+	db.run("UPDATE categories SET name = ? WHERE id = ?", req.body.tag, id, function(err){
 		if(err){
 			throw err;
 		}
@@ -92,7 +92,7 @@ app.get('/dishes/:id', function(req, res) {
 });
 
 app.post('/dishes', function(req, res) {
-	db.run("INSERT INTO dishes (name, price, image_url, category_id) VALUES (?,?,?,?)", req.body.name, req.body.price, req.body.image_url, req.body.category_id, function(err) {
+	db.run("INSERT INTO dishes (name, texture, flavor) VALUES (?,?,?)", req.body.name, req.body.texture, req.body.flavor, function(err) {
 		if(err) {
 			throw err;
 		}
@@ -108,7 +108,7 @@ app.post('/dishes', function(req, res) {
 
 app.put('/dishes/:id', function(req, res) {
 	var id = req.params.id;
-	db.run("UPDATE dishes SET name = ?, image_url = ?, price = ?, category_id = ? WHERE id = ?", req.body.name, req.body.image_url, req.body.price, req.body.category_id, id, function (err) {
+	db.run("UPDATE dishes SET name = ?, texture = ?, flavor = ? WHERE id = ?", req.body.name, req.body.texture, req.body.flavor,  req.body.id, function (err) {
 		if(err) {
 			throw err;
 		}

@@ -24,9 +24,10 @@
 
 
 
-<div class= "homeContent">
-	<a id = "sumoShow"> <h2> SUMO RULES </h2> </a>
+<script type ="text/template" id ="goHome">
+	 
 	<div id="sumoRules">
+		<h2> SUMO RULES </h2>
 		<p class ="sumoDiet">Don’t eat breakfast.  Sumo wrestlers never eat breakfast.  This is a great way to slow your metabolism way down and will definitely ensure over eating later in the day.</p>
 
 		<p class ="sumoDiet">Exercise on an empty stomach.  When you exercise without proper fueling, your metabolism will conserve every ounce of energy you have left to get you through the activity.  So you end up burning far less calories than you would have had you eaten prior to exercising.</p>
@@ -39,22 +40,20 @@
 
 		<p class ="sumoDiet">Sleep after eating.  When they finish their large meals, the wrestlers will take a long nap.  Going to sleep on a full stomach forces the body to store most of the calories as fat because it doesn’t have the ability to metabolize large amounts of food while sleeping</p>
 
-	<div>
+	</div>
 
-<div>
+</script>
 
 <div id = "contentArea">
+	
+</div>
 
-<div>
-
-
-<div id = "formHere">
 
 <ul id ="eventList">
-<ul>
+</ul>
 
 <ul id ="menuList">
-<ul>
+</ul>
 
 <script type ="text/template" id ="sumoTemplate">
 	<li><a href ="/#sumos/<%= sumo.id %>"><%= sumo.title %></a></li>
@@ -63,6 +62,8 @@
 	<span class = "sumo"> 
 		<%= sumo.shikona %> from <%= sumo.hometown %> <br>
 		ranked as <%= sumo.rank %> has <%= sumo.decorItem %>
+		<button class = "editButton">Edit</button>
+        <button class = "deleteButton">Delete</button>
 	</span>
 </script>
 
@@ -102,39 +103,42 @@
 
 
 
-<script type = "text/template" id = "eventTemplate">
-	<li><a href = "/#events/<%= event.id %>"><%= event.theme %></a></li>
+<script type = "text/template" id = "happenTemplate">
+	<li><a href = "/#happens/<%= happen.id %>"><%= happen.theme %></a></li>
 </script>
-<script type = "text/template" id = "showevent">
-	<span class = "event">
-		<%= event.theme %> happened on <%= event.created_at %>
-		under the conditions of: <%= event.rule %>
-		<br><img src= '<%= event.pic_url %>'>  
-			<img src= '<%= event.space %>'>
+<script type = "text/template" id = "showhappen">
+	<span class = "happen">
+		<%= happen.theme %> happened on <%= happen.created_at %>
+		under the conditions of: <%= happen.rule %>
+		<br><img src= '<%= happen.pic_url %>'>  
+			<img src= '<%= happen.space %>'>
+			 <button class = "editButton">Edit</button>
+        	<button class = "deleteButton">Delete</button>
 			<%= attendance.pplCount %> sumos attended ...
-		<a href = "/#events/<%= event.id %>/menus" id= "promptMenus"> we fixed up: </a>
+		<a href = "/#happens/<%= happen.id %>/menus" id= "promptMenus"> we fixed up: </a>
+
 	</span>
 </script>
 
-<script type="text/template" id ="addEventForm">
-	<span class = "addEvent">
-	<input type = "text" id = "nEvent_theme"  placeholder= "event theme">
-	<input type = "text" id = "nEvent_rule"  placeholder= "event Rule">
-	<input type = "text" id = "nEvent_picUrl"  placeholder= "picture link">
-	<input type = "text" id = "nEvent_space"  placeholder= "space layout">
-	<input type = "text" id = "nEvent_pplCount"  placeholder= "maximum attendants">
-	<button id = "addNewEvent"> add event </button>
+<script type="text/template" id ="addHappenForm">
+	<span class = "addHappen">
+	<input type = "text" id = "nHappen_theme"  placeholder= "Happen theme">
+	<input type = "text" id = "nHappen_rule"  placeholder= "Happen Rule">
+	<input type = "text" id = "nHappen_picUrl"  placeholder= "picture link">
+	<input type = "text" id = "nHappen_space"  placeholder= "space layout">
+	<input type = "text" id = "nHappen_pplCount"  placeholder= "maximum attendants">
+	<button id = "addNewHappen"> add happen </button>
 	<p class ="errorMsg"> </p>
 	<span>
 </script>
 
-<script type="text/template" id ="editEventForm">
-	<span class = "editEvent">
-	<input type = "text" id = "nEvent_theme<%= event.id %>" value= "<%= event.theme %>">
-	<input type = "text" id = "nEvent_rule<%= event.id %>" value= "<%= event.rule %>">
-	<input type = "text" id = "nEvent_picUrl<%= event.id %>" value= "<%= event.pic_url %>">
-	<input type = "text" id = "nEvent_space<%= event.id %>" value= "<%= event.space %>">
-	<input type = "text" id = "nEvent_pplCount<%= event.id %>" value= "<%= event.pplCount %>">
+<script type="text/template" id ="editHappenForm">
+	<span class = "editHappen">
+	<input type = "text" id = "nHappen_theme<%= happen.id %>" value= "<%= happen.theme %>">
+	<input type = "text" id = "nHappen_rule<%= happen.id %>" value= "<%= happen.rule %>">
+	<input type = "text" id = "nHappen_picUrl<%= happen.id %>" value= "<%= happen.pic_url %>">
+	<input type = "text" id = "nHappen_space<%= happen.id %>" value= "<%= happen.space %>">
+	<input type = "text" id = "nHappen_pplCount<%= happen.id %>" value= "<%= happen.pplCount %>">
 	<button class = "updateButton">Update</button>
 	<p class ="errorMsg"> </p>
 	<span>
@@ -152,6 +156,8 @@
 	 	<img src= '<%= menu.img_url %>'>
 	 	composed by the following 
 	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
+	 	<button class = "editButton">Edit</button>
+        <button class = "deleteButton">Delete</button>
 	 </span>
 </script>
 
@@ -177,14 +183,22 @@
 
 
 
-<script type = "text/template" id = "dishTemplate" >
-	<li><a href = "/#dishes/<%= dish.id %>"><%= dish.name %></a></li>
-</script>
+
 <script type = "text/template" id= "showDish">
-	<span class = "dish">
-		<h3><%= dish.name %><h3>
-		<br><%= dish.texture %>
-		<br><%= dish.flavor %>
+
+	<a href = "/#dishes/<%= dish.id %>"><h3><%= dish.name %></h3></a>
+	<span class = "dishContent"  style="display:none">
+		feels like <%= dish.texture %> with a  <%= dish.flavor %> sensation
+		<button class = "editButton">Edit</button>
+        <button class = "deleteButton">Delete</button>
+	</span>
+
+	<span class = "editDishForm" style="display: none">
+	<input type = "text" id = "nDish_name<%= dish.id %>" value = "<%= dish.name %>">
+	<input type = "text" id = "nDish_texture<%= dish.id %>" value = "<%= dish.texture %>">
+	<input type = "text" id = "nDish_flavor<%= dish.id %>" value = "<%= dish.flavor %>">
+	<button class = "updateButton">Update</button>
+	<p class ="errorMsg"> </p>
 	</span>
 </script>
 
@@ -198,15 +212,20 @@
 	<span>
 </script>
 
-<script type="text/template" id ="editDishForm">
-	<span class = "editDish">
-	<input type = "text" id = "nDish_name<%= dish.id %>" value = "<%= dish.name %>">
-	<input type = "text" id = "nDish_texture<%= dish.id %>" value = "<%= dish.texture %>">
-	<input type = "text" id = "nDish_flavor<%= dish.id %>" value = "<%= dish.flavor %>">
-	<button class = "updateButton">Update</button>
-	<p class ="errorMsg"> </p>
-	<span>
-</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
+<script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.validation/0.11.3/backbone-validation-min.js"></script>
+
+<script src = "/scripts/models.js"></script>
+<script src = "/scripts/collections.js"></script>
+<script src = "/scripts/views.js"></script>
+<script src = "/scripts/routes.js"></script>
+
 
 </body>
 </html>

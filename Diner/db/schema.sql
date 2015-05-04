@@ -1,26 +1,82 @@
-DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS happens;
+DROP TABLE IF EXISTS sumos;
+DROP TABLE IF EXISTS attendance;
+DROP TABLE IF EXISTS menus;
+DROP TABLE IF EXISTS happen_menus;
 DROP TABLE IF EXISTS dishes;
+DROP TABLE IF EXISTS menu_dishes;
 
-CREATE TABLE categories (
-  id INTEGER PRIMARY KEY,
-  name TEXT,
+CREATE TABLE happens(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  theme TEXT,
+  rule TEXT, 
+  pic_url TEXT, 
+  space TEXT, 
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE dishes (
-  id INTEGER PRIMARY KEY,
-  name TEXT,
-  image_url TEXT,
-  price INTEGER,
-  category_id INTEGER,
+CREATE TABLE sumos( 
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  shikona TEXT, 
+  rank TEXT, 
+  weight INTEGER,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE attendance(
+  id INTEGER PRIMARY KEY AUTOINCREMENT, 
+  sumo_id INTEGER, 
+  happen_id INTEGER, 
+  FOREIGN KEY(sumo_id) REFERENCES sumos(id),
+  FOREIGN KEY(happen_id) REFERENCES happens(id)
+); 
 
-CREATE TRIGGER cat_trig BEFORE UPDATE ON categories BEGIN
-  UPDATE categories SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
+CREATE TABLE menus(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  tag TEXT,
+  mood TEXT, 
+  img_url TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE happen_menus(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  happen_id INTEGER, 
+  menu_id INTEGER, 
+  FOREIGN KEY(happen_id) REFERENCES happens(id),
+  FOREIGN KEY(menu_id) REFERENCES menus(id)
+);
+
+CREATE TABLE dishes(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  texture TEXT, 
+  flavor TEXT, 
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE menu_dishes(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  menu_id INTEGER, 
+  dish_id INTEGER, 
+  FOREIGN KEY(menu_id) REFERENCES menus(id),
+  FOREIGN KEY(dish_id) REFERENCES dishes(id)
+);
+
+CREATE TRIGGER happen_trig BEFORE UPDATE ON happens BEGIN
+  UPDATE happens SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
+END;
+
+CREATE TRIGGER sumos_trig BEFORE UPDATE ON sumos BEGIN
+  UPDATE sumos SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
+END;
+
+CREATE TRIGGER menu_trig BEFORE UPDATE ON menus BEGIN
+  UPDATE menus SET updated_at = CURRENT_TIMESTAMP WHERE id = new.id;
 END;
 
 CREATE TRIGGER dish_trig BEFORE UPDATE ON dishes BEGIN
