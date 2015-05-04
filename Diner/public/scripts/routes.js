@@ -22,10 +22,6 @@ var DishRoutes = Backbone.Router.extend({
 		var thisDish = new Dish({id:dishID}); 
 		thisDish.fetch({
 			success: function(){
-				// if(currentView !== undefined){
-				// 	currentView.remove(); 
-				// }
-				//$('<div id = "dishArea"'+dishID+'>').appendTo($('li#dish'+dishID)); 
 				new ShowDishView({model:thisDish}).render(); 
 			}
 		});
@@ -50,6 +46,45 @@ var DishRoutes = Backbone.Router.extend({
 	},
 }); 
 
+var MenuRoutes = Backbone.Router.extend({
+	routes: {
+		"menus":"allMenus", 
+		"menus/new":"newMenu", 
+		"menus/:menuID":"showMenu", 
+	},
+	showMenu:function(menuID){
+		var thisMenu = new Menu({id:menuID}); 
+		thisMenu.fetch({
+			success: function(){
+				if(currentView !== undefined){
+					currentView.remove();
+				}
+				$('<div id = "menuSection">').appendTo($('div#contentArea'));
+				currentView = new ShowMenuView({model:thisMenu}).render();
+			}
+		});
+	},
+	allMenus:function(){
+		menus.fetch({
+			success: function(model, response){
+				if(currentView !== undefined){
+					currentView.remove(); 
+				}
+				$('<ul id = "allMenus">').appendTo($('div#contentArea'));
+				currentView = new AllMenusView({collection: menus}).render();
+			}
+		});
+	},
+	newMenu : function(){
+		if(currentView !== undefined){
+			currentView.remove();
+		}
+		$('<div id = "formHere">').appendTo($('div#contentArea'));
+		currentView = new CreateMenuView({collection:menus}).render();
+	},
+});
 var homeRoute = new mainRoutes();
-var dishRoutes = new DishRoutes(); 
+var dishRoutes = new DishRoutes();
+var menuRoutes = new MenuRoutes();
+
 Backbone.history.start();

@@ -14,8 +14,8 @@ app.get('/', function(req, res){
 	res.render('index.html')
 });
 
-app.get('/categories', function(req, res){
-	db.all("SELECT * FROM categories", function(err, rows){
+app.get('/menus', function(req, res){
+	db.all("SELECT * FROM menus", function(err, rows){
 		if(err){
 			throw err;
 		}
@@ -23,8 +23,8 @@ app.get('/categories', function(req, res){
 	});
 });
 
-app.get('/categories/:id', function(req, res){
-	db.get('SELECT * FROM categories WHERE id = ?', req.params.id, function(err, row){
+app.get('/menus/:id', function(req, res){
+	db.get('SELECT * FROM menus WHERE id = ?', req.params.id, function(err, row){
 		if(err){
 			throw err;
 		}
@@ -32,13 +32,13 @@ app.get('/categories/:id', function(req, res){
 	});
 });
 
-app.post('/categories', function(req, res){
-	db.run("INSERT INTO categories (tag) VALUES (?)", req.body.tag, function(err,row){
+app.post('/menus', function(req, res){
+	db.run("INSERT INTO menus (tag, mood, img_url) VALUES (?,?,?)", req.body.tag, req.body.mood, req.body.img_url, function(err,row){
 		if(err){
 			throw err;
 		}
 		var id = this.lastID;
-        db.get("SELECT * FROM categories WHERE id = ?", id, function(err, row) {
+        db.get("SELECT * FROM menus WHERE id = ?", id, function(err, row) {
         	if(err) {
         		throw err;
         	}
@@ -47,13 +47,13 @@ app.post('/categories', function(req, res){
     });
 });
 
-app.put('/categories/:id', function(req, res){
+app.put('/menus/:id', function(req, res){
 	var id = req.params.id
-	db.run("UPDATE categories SET name = ? WHERE id = ?", req.body.tag, id, function(err){
+	db.run("UPDATE menus SET tag = ?, mood =?, img_url = ? WHERE id = ?", req.body.tag, req.body.mood, req.body.img_url, req.body.id, function(err){
 		if(err){
 			throw err;
 		}
-		db.get("SELECT * FROM categories WHERE id = ?", id, function(err, row){
+		db.get("SELECT * FROM menus WHERE id = ?", id, function(err, row){
 			if(err){
 				throw err;
 			}
@@ -62,8 +62,8 @@ app.put('/categories/:id', function(req, res){
 	});
 });
 
-app.delete('/categories/:id', function(req, res){
-	db.run("DELETE FROM categories WHERE id = ?", req.params.id, function(err){
+app.delete('/menus/:id', function(req, res){
+	db.run("DELETE FROM menus WHERE id = ?", req.params.id, function(err){
 		if(err){
 			throw err;
 		}

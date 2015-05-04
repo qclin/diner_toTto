@@ -150,15 +150,27 @@
 <script type = "text/template" id = "menuTemplate">
 	<li><a href = "/#menus/<%= menu.id %>"><%= menu.tag%></a></li>
 </script>
+
 <script type = "text/template" id = "showMenu"> 
-	 <span class = "menu">
-	 	<h2><%= menu.tag %><h2> is about <%= menu.mood %> <br>
-	 	<img src= '<%= menu.img_url %>'>
+	 <span class = "menuContent">
+	 	<h2><%= menu.tag %></h2> 
+	 	is about <%= menu.mood %> <br>
+	 	<img src= '<%= menu.img_url %>'><br>
 	 	composed by the following 
 	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
 	 	<button class = "editButton">Edit</button>
         <button class = "deleteButton">Delete</button>
 	 </span>
+
+
+	<span class = "editMenuForm" style = "display:none">
+		<input type = "text" id = "nMenu_tag<%= menu.id %>"  value= "<%= menu.tag %>">
+		<input type = "text" id = "nMenu_mood<%= menu.id %>"  value= "<%= menu.mood %>">
+		<input type = "text" id = "nMenu_imgUrl<%= menu.id %>"  value= "<%= menu.img_url %>">
+		<button class = "updateButton">Update</button>
+		<p class ="errorMsg"> </p>
+	</span>
+
 </script>
 
 <script type="text/template" id ="addMenuForm">
@@ -168,20 +180,8 @@
 	<input type = "text" id = "nMenu_imgUrl"  placeholder= "inspiration image">
 	<button id = "addNewMenu"> add menu </button>
 	<p class ="errorMsg"> </p>
-	<span>
+	</span>
 </script>
-
-<script type="text/template" id ="editMenuForm">
-	<span class = "editMenu">
-	<input type = "text" id = "nMenu_tag<%= menu.id %>"  value= "<%= menu.tag %>">
-	<input type = "text" id = "nMenu_mood<%= menu.id %>"  value= "<%= menu.mood %>">
-	<input type = "text" id = "nMenu_imgUrl<%= menu.id %>"  value= "<%= menu.img_url %>">
-	<button class = "updateButton">Update</button>
-	<p class ="errorMsg"> </p>
-	<span>
-</script>
-
-
 
 
 <script type = "text/template" id= "showDish">
@@ -194,11 +194,11 @@
 	</span>
 
 	<span class = "editDishForm" style="display: none">
-	<input type = "text" id = "nDish_name<%= dish.id %>" value = "<%= dish.name %>">
-	<input type = "text" id = "nDish_texture<%= dish.id %>" value = "<%= dish.texture %>">
-	<input type = "text" id = "nDish_flavor<%= dish.id %>" value = "<%= dish.flavor %>">
-	<button class = "updateButton">Update</button>
-	<p class ="errorMsg"> </p>
+		<input type = "text" id = "nDish_name<%= dish.id %>" value = "<%= dish.name %>">
+		<input type = "text" id = "nDish_texture<%= dish.id %>" value = "<%= dish.texture %>">
+		<input type = "text" id = "nDish_flavor<%= dish.id %>" value = "<%= dish.flavor %>">
+		<button class = "updateButton">Update</button>
+		<p class ="errorMsg"> </p>
 	</span>
 </script>
 
@@ -209,7 +209,7 @@
 	<input type = "text" id = "nDish_flavor" placeholder= "flavor">
 	<button id = "addNewDish"> add dish </button>
 	<p class ="errorMsg"> </p>
-	<span>
+	</span>
 </script>
 
 

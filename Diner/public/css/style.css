@@ -75,3 +75,11 @@ ul#navBar Img{
 	width: auto;
 	height: 5em;
 }
+.menuContent{
+	padding: 2em;
+	margin: auto;
+}
+.menuContent img{
+	height:20em;
+	width: auto;
+}

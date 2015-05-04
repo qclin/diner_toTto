@@ -100,6 +100,94 @@ var CreateDishView = Backbone.View.extend({
 	}
 }); 
 
+var ShowMenuView = Backbone.View.extend({
+	el: 'div#menuSection', 
+	template: _.template($('#showMenu').html()), 
+	events: {
+		"click button.deleteButton":"deleteMenu", 
+		"click button.editButton":"editMenu", 
+		"click button.updateButton":"updateMenu", 
+	}, 
+	updateMenu: function(){
+		var newTag = this.$("#nMenu_tag"+ this.model.id).val();
+		var newMood = this.$("#nMenu_mood"+ this.model.id).val(); 
+		var newImage = this.$("#nMenu_imgUrl"+this.model.id).val();
+		this.model.set({ tag:newTag, mood:newMood, img_url: newImage }); 
+		// neeed to add form validation here
+		this.model.save(); 
+		menuRoutes.navigate('#menus', true); 
+	},
+	editMenu: function(){
+		this.$("span.menuContent").hide(); 
+		this.$("span.editMenuForm").show(); 
+	},
+	deleteMenu: function(){
+		this.model.destroy(); 
+		menuRoutes.navigate("#menus", true);
+	}, 
+	render: function(){
+		this.$el.html(this.template({menu: this.model.toJSON()}));
+		return this;
+	}
+});
+
+var AllMenusView = Backbone.View.extend({
+	el:"ul#allMenus", 
+	template: _.template($('#menuTemplate').html()),
+
+	initialize: function(){
+		this.listenTo(this.collection, "sync remove", this.render); 
+	}, 
+	render: function(){
+		var menus = this; 
+		menus.$el.html(""); 
+		menus.$el.prepend('<a href = "/#menus/new" >add a new menu</a>');
+		this.collection.each(function(menu){
+			menus.$el.append(menus.template({menu: menu.toJSON()}));
+		}); 
+		return this; 
+	}
+});
+
+var CreateMenuView = Backbone.View.extend({
+	el:"div#formHere", 
+	events:{"click button#addNewMenu": function(e){
+		e.preventDefault();
+		this.createMenu(); 
+	}}, 
+	template: _.template($('#addMenuForm').html()),
+	render: function(){
+		this.$el.html(this.template()); 
+		return this;
+	}, 
+	createMenu: function(){
+		var thisView = this; 
+		// incase we lose 'this' later; 
+		var tag = this.$('#nMenu_tag').val(); 
+		var mood = this.$('#nMenu_mood').val();
+		var image = this.$('#nMenu_imgUrl').val(); 
+		//Jquery SerializeObject, 
+		var jserMenu = {tag:tag, mood:mood, img_url: image};
+		// create a model instance for Validation
+		var temp = new Menu(jserMenu); 
+		// bind validation to temp model
+		Backbone.Validation.bind(this,{
+			model:temp
+		}); 
+		temp.validate();
+		temp.bind('validated', function(isValid, model, errors){
+			if(isValid === true){
+				thisView.collection.create(jserMenu); 
+				menuRoutes.navigate('#menus', true); 
+			}else{
+				Object.keys(errors).forEach(function(key){
+					$('.errorMsg').append("<br>"+errors[key]); 
+				});
+			}
+		})
+	}
+});
+
 
 
 
