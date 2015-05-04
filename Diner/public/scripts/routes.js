@@ -55,12 +55,8 @@ var MenuRoutes = Backbone.Router.extend({
 	showMenu:function(menuID){
 		var thisMenu = new Menu({id:menuID}); 
 		thisMenu.fetch({
-			success: function(){
-				if(currentView !== undefined){
-					currentView.remove();
-				}
-				$('<div id = "menuSection">').appendTo($('div#contentArea'));
-				currentView = new ShowMenuView({model:thisMenu}).render();
+			success:function(){
+				new ShowMenuView({model:thisMenu}).render();
 			}
 		});
 	},

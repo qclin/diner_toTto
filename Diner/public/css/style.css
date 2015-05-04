@@ -75,11 +75,13 @@ ul#navBar Img{
 	width: auto;
 	height: 5em;
 }
-.menuContent{
+
+#allMenus img{
+	height:25em;
+	width: auto;
+}
+#allMenus li{
 	padding: 2em;
 	margin: auto;
-}
-.menuContent img{
-	height:20em;
-	width: auto;
+	display:inline-block;
 }

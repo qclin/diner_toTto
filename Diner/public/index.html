@@ -146,22 +146,18 @@
 
 
 
-
-<script type = "text/template" id = "menuTemplate">
-	<li><a href = "/#menus/<%= menu.id %>"><%= menu.tag%></a></li>
-</script>
-
 <script type = "text/template" id = "showMenu"> 
-	 <span class = "menuContent">
-	 	<h2><%= menu.tag %></h2> 
+	 
+	 <a href= "/#menus/<%= menu.id %>"><img src= '<%= menu.img_url %>'><br><a>
+	 <span class = "menuContent" style ="display:none">
+	 	<h3><%= menu.tag %></h3>
 	 	is about <%= menu.mood %> <br>
-	 	<img src= '<%= menu.img_url %>'><br>
-	 	composed by the following 
+	 	composed by these
 	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
+	 	<br>
 	 	<button class = "editButton">Edit</button>
         <button class = "deleteButton">Delete</button>
 	 </span>
-
 
 	<span class = "editMenuForm" style = "display:none">
 		<input type = "text" id = "nMenu_tag<%= menu.id %>"  value= "<%= menu.tag %>">

@@ -38,6 +38,7 @@ var Menu = Backbone.Model.extend({
 		});
 	}, 
 	defaults:{
+		//dishes: dishCollection
 		tag: 'basic',
 		mood: 'the most rudimentary diet to solidify their size',
 		img_url: 'http://www.japan-guide.com/g8/2080_05.jpg'

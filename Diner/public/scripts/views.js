@@ -53,7 +53,7 @@ var AllDishesView = Backbone.View.extend({
 	render:function(){
 		var dishes = this.$el; 
 		dishes.html(''); 
-		dishes.prepend('<a href = "/#dishes/new" >add a new dish</a>');
+		dishes.prepend('<a href = "/#dishes/new" >add a new dish</a><br>');
 		this.collection.each(function(dish){
 			dishes.append(new ShowDishView({model:dish}).render().$el); 
 		}); 
@@ -101,13 +101,17 @@ var CreateDishView = Backbone.View.extend({
 }); 
 
 var ShowMenuView = Backbone.View.extend({
-	el: 'div#menuSection', 
+	tagName:'li', 
 	template: _.template($('#showMenu').html()), 
 	events: {
+		"click img":"showContent",
 		"click button.deleteButton":"deleteMenu", 
 		"click button.editButton":"editMenu", 
 		"click button.updateButton":"updateMenu", 
 	}, 
+	showContent: function(){
+		this.$("span.menuContent").show();
+	},
 	updateMenu: function(){
 		var newTag = this.$("#nMenu_tag"+ this.model.id).val();
 		var newMood = this.$("#nMenu_mood"+ this.model.id).val(); 
@@ -118,6 +122,7 @@ var ShowMenuView = Backbone.View.extend({
 		menuRoutes.navigate('#menus', true); 
 	},
 	editMenu: function(){
+		this.$("img").hide();
 		this.$("span.menuContent").hide(); 
 		this.$("span.editMenuForm").show(); 
 	},
@@ -133,20 +138,31 @@ var ShowMenuView = Backbone.View.extend({
 
 var AllMenusView = Backbone.View.extend({
 	el:"ul#allMenus", 
-	template: _.template($('#menuTemplate').html()),
 
 	initialize: function(){
 		this.listenTo(this.collection, "sync remove", this.render); 
 	}, 
+
 	render: function(){
-		var menus = this; 
-		menus.$el.html(""); 
-		menus.$el.prepend('<a href = "/#menus/new" >add a new menu</a>');
+		var menus = this.$el; 
+		menus.html(""); 
+		menus.prepend('<a href = "/#menus/new">add a new menu</a><br>'); 
 		this.collection.each(function(menu){
-			menus.$el.append(menus.template({menu: menu.toJSON()}));
+			menus.append(new ShowMenuView({model:menu}).render().$el);
 		}); 
-		return this; 
+		return this;
 	}
+
+		/// render this way for individual page/ using a template for list in html
+	// render: function(){
+	// 	var menus = this; 
+	// 	menus.$el.html(""); 
+	// 	menus.$el.prepend('<a href = "/#menus/new" >add a new menu</a>');
+	// 	this.collection.each(function(menu){
+	// 		menus.$el.append(menus.template({menu: menu.toJSON()}));
+	// 	}); 
+	// 	return this; 
+	// }
 });
 
 var CreateMenuView = Backbone.View.extend({
