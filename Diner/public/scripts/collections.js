@@ -14,8 +14,6 @@ var DishesCollection = Backbone.Collection.extend({
 }); 
 var dishes = new DishesCollection(); 
 
-
-
 var MenusCollection = Backbone.Collection.extend({
 	model: Menu, 
 	url:"/menus", 
@@ -50,5 +48,35 @@ var HappeningsCollection = Backbone.Collection.extend({
 });
 
 var happenings = new HappeningsCollection(); 
+
+var MenuDishesCollection = Backbone.Collection.extend({
+	model: MenuDish, 
+	url:"/alreadyOnMenu",
+	initialize: function(){
+		console.log('menuDish assignment created'); 
+		this.on('add', function(model, collection){
+			//console.log(JSON.stringify(model)+ 'added to assignment'); 
+		}); 
+		this.on('remove', function(model, collection){
+			//console.log(JSON.stringify(model)+ ' removed from assignment'); 
+		}); 
+	}
+});
+
+var NotOnMenuCollection = Backbone.Collection.extend({
+	model: MenuDish,
+	url: "/dishesNotOnMenu", 
+	initialize: function(){
+		this.on('add', function(model, collection){
+
+		});
+		this.on('remove', function(model, collection){
+
+		});
+	}
+}); 
+
+var menuDishes = new MenuDishesCollection();
+var notOnMenu = new NotOnMenuCollection(); 
 
 

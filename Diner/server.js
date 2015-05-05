@@ -129,6 +129,53 @@ app.delete('/dishes/:id', function(req, res) {
 		res.json({deleted: true});
 	});
 });
+// getting all the dishes that are on this menu 
+app.get('/alreadyOnMenu', function(req, res){
+	var menuID = req.query.menuID; 
+	db.all("SELECT * FROM menu_dishes INNER JOIN dishes ON menu_dishes.dish_id = dishes.id WHERE menu_dishes.menu_id =" + menuID, function(err, onMenu){
+		if(err){ throw err; }
+		console.log(onMenu);
+		res.json(onMenu);
+	});
+});
+
+/// fetching a list of dishes not on thismenu 
+//GET http://localhost:3000/dishesNotOnMenu?menuID=2
+app.get('/dishesNotOnMenu', function(req, res){
+	console.log("dishesNotOnMenu route " + req.query.menuID);
+	var menuID = req.query.menuID; 
+	db.all("SELECT * FROM dishes WHERE dishes.id NOT IN (SELECT dish_id FROM menu_dishes WHERE menu_id ="+ menuID +")", function(err, notOnMenu){
+		if(err){ throw err; }
+		res.json(notOnMenu); 
+	});
+});
+
+
+// posting dish assignment
+app.post('/alreadyOnMenu', function(req, res){
+	db.run("INSERT INTO menu_dishes (menu_id, dish_id) VALUES (?,?)", req.body.menu_id, req.body.dish_id, function(err){
+		if(err){ throw err; }
+		var id = this.lastID; 
+		db.get("SELECT * FROM menu_dishes INNER JOIN dishes ON menu_dishes.menu_id = "+ req.body.menu_id +" WHERE menu_dishes.dish_id =" + id, function(err, newOnMenu){
+			if(err){ throw err; }
+			res.json(newOnMenu);
+		});
+	});
+});
+
+// removing dish from menu 
+app.delete('/menus/:menuID/removeDish', function(req,res){
+	db.run('DELETE FROM menu_dishes WHERE menu_id = ',+ req.params.menuID, function(err){
+		res.json({deleted: true});
+	});
+});
+
+
+
+
+
+
+
 
 app.listen(3000);
 console.log('Listening on port 3000');

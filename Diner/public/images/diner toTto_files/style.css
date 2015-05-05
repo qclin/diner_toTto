@@ -1,0 +1,129 @@
+body{
+	font-family: 'Questrial', sans-serif;
+	height: 100%
+}
+
+header{
+	float: right;
+	text-align: right;
+	color:#3A5F0B;
+	box-sizing: border-box;
+	width: 30%;
+	position: relative;
+	margin-top: 1em;
+}
+
+#homeContent{
+	padding: 2em
+	float: center;
+	position: relative;
+	text-align: center;
+	background-image: url("http://www.gardeningknowhow.com/wp-content/uploads/2011/05/barrel-cactus1.jpg");
+	/*background-repeat: no-repeat;*/
+    background-position: center top;
+    box-sizing: border-box;
+}
+h1{
+
+}
+li{
+	list-style: none;
+}
+a{	
+	font-family: 'Quicksand', sans-serif;
+	text-decoration: none;
+	color:#3A5F0B;
+}
+
+a:hover{
+	background-color: blanchedalmond; 
+	color:#3A5F0B;
+}
+.sumoDiet:hover{
+	background-color: #ffffff; 
+	color:#3A5F0B;
+	padding:1em;
+}
+
+div#sumoRules{
+	margin: auto;
+	padding: auto;
+	width: 65%;
+	color:blanchedalmond;
+	position:relative;
+}
+
+button{
+	border:none;
+}
+nav{
+	border-color: #ffffff;
+	border-style: solid;
+	border-width: .3em;
+	text-align: left;
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+ul#navBar li{
+	display: inline-block;
+	padding:.3em;
+	margin: 0;
+
+}
+ul#navBar Img{
+	width: auto;
+	height: 5em;
+}
+
+#allMenus img{
+	height:25em;
+	width: auto;
+}
+#allMenus li{
+	padding: 2em;
+	margin: auto;
+	display:inline-block;
+}
+ul#notOnMenu li{
+	positon: relative;
+	display: inline-flex;
+	margin-left:3em;
+	margin-bottom: 1em;
+	padding:.3em;
+	border-style: solid;  
+	border-color: blanchedalmond;
+	color:#3A5F0B;
+}
+div#square{
+	position: relative;
+	width: 26.5em;
+	height: 26.5em;
+	margin: auto;
+	border-style: solid;
+	border-color: #ccffcc;
+	text-align: center;
+	vertical-align: middle;
+	boxing-sizing: border-box;
+	padding:1em;
+}
+div#circle{
+	width: 20em;
+	height: 20em;
+	padding:3em;
+	background-image: url("../images/IMG_2390.JPG");
+	background-size: cover;
+	border-style: solid;
+	border-color: #0e2f44;
+	border-radius: 50%;
+	boxing-sizing: border-box;
+}
+div#innerCircle{
+	width: 20em;
+	height: 20em;
+	border-width:.2em;
+	border-style: solid;
+	border-color: #ffffff;
+	border-radius: 50%;
+	boxing-sizing: border-box;
+}

@@ -5,6 +5,7 @@
 	<link rel = "stylesheet" type = "text/css" href = "css/style.css" />
 	<link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+
 </head>
 <body>
 <nav>
@@ -47,13 +48,6 @@
 <div id = "contentArea">
 	
 </div>
-
-
-<ul id ="eventList">
-</ul>
-
-<ul id ="menuList">
-</ul>
 
 <script type ="text/template" id ="sumoTemplate">
 	<li><a href ="/#sumos/<%= sumo.id %>"><%= sumo.title %></a></li>
@@ -144,19 +138,26 @@
 	<span>
 </script>
 
+<script type = "text/template" id = "addDishtoMenuForm"> 
+	<li id = "dish<%= dish.id %>" class="ui-widget-content" value = "<%= dish.id %>"><%= dish.name %></li>
+</script>
 
+<script type = "text/template" id = "showDishMenuForm">
+	<li class = "onMenuDishes" value = "<%= dishOn.id%>"> <%= dishOn.name %> <p> <%= dishOn.texture %><%= dishOn.flavor %></p></li>
+</script> 
 
 <script type = "text/template" id = "showMenu"> 
 	 
-	 <a href= "/#menus/<%= menu.id %>"><img src= '<%= menu.img_url %>'><br><a>
-	 <span class = "menuContent" style ="display:none">
-	 	<h3><%= menu.tag %></h3>
-	 	is about <%= menu.mood %> <br>
-	 	composed by these
-	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
-	 	<br>
+	 <a href= "/#menus/<%= menu.id %>"><img src= '<%= menu.img_url %>'><br></a>
+	 <div id = "admin">
 	 	<button class = "editButton">Edit</button>
         <button class = "deleteButton">Delete</button>
+     </div>
+	 <span class = "menuContent">
+	 	<h3><%= menu.tag %></h3>
+	 	is about <%= menu.mood %><br>
+	 	composed by these <br>
+	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
 	 </span>
 
 	<span class = "editMenuForm" style = "display:none">
@@ -164,6 +165,7 @@
 		<input type = "text" id = "nMenu_mood<%= menu.id %>"  value= "<%= menu.mood %>">
 		<input type = "text" id = "nMenu_imgUrl<%= menu.id %>"  value= "<%= menu.img_url %>">
 		<button class = "updateButton">Update</button>
+		<a href = "/#menus/<%= menu.id %>/addDish">change dishes</a>
 		<p class ="errorMsg"> </p>
 	</span>
 
@@ -212,10 +214,14 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="http://documentcloud.github.com/underscore/underscore-min.js"></script>
 <script src="http://documentcloud.github.com/backbone/backbone-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.validation/0.11.3/backbone-validation-min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/backbone-relational/0.9.0/backbone-relational.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
 <script src = "/scripts/models.js"></script>
 <script src = "/scripts/collections.js"></script>

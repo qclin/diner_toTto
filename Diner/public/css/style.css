@@ -10,7 +10,7 @@ header{
 	box-sizing: border-box;
 	width: 30%;
 	position: relative;
-	margin: auto;
+	margin-top: 1em;
 }
 
 #homeContent{
@@ -22,6 +22,14 @@ header{
 	/*background-repeat: no-repeat;*/
     background-position: center top;
     box-sizing: border-box;
+}
+.menuContent{
+	display: none;
+	color: #cd5b45;
+	font-family: 'Quicksand', sans-serif;
+}
+#admin{
+	display: none;
 }
 h1{
 
@@ -76,12 +84,74 @@ ul#navBar Img{
 	height: 5em;
 }
 
-#allMenus img{
+.allMenus img{
 	height:25em;
 	width: auto;
 }
-#allMenus li{
+.allMenus li{
 	padding: 2em;
 	margin: auto;
 	display:inline-block;
 }
+ul#notOnMenu li{
+	float:right;
+	positon: relative;
+	display: inline-flex;
+	margin-left:3em;
+	margin-bottom: 1em;
+	padding:.3em;
+	border-style: solid;  
+	border-color: blanchedalmond;
+	color:#3A5F0B;
+}
+div.menuTaget{
+	position: relative;
+	width: 26.5em;
+	height: 26.5em;
+	border-color: #ccffcc;
+	text-align: center;
+	vertical-align: middle;
+	boxing-sizing: border-box;
+	padding:1em;
+}
+div#square:hover{
+	background-color: blanchedalmond;
+}
+div#circle{
+	width: 20em;
+	height: 20em;
+	padding:3em;
+	background-image: url("../images/IMG_2390.JPG");
+	background-size: cover;
+	border-style: solid;
+	border-color: #cbd3db;
+	border-radius: 50%;
+	boxing-sizing: border-box;
+}
+div#innerCircle{
+	width: 20em;
+	height: 20em;
+	border-width:.2em;
+	border-style: solid;
+	border-color: #ffffff;
+	border-radius: 50%;
+	boxing-sizing: border-box;
+}
+.alreadyOnMenuClass{
+	padding: 3em;
+	vertical-align: top;
+	border-style: solid;
+	border-color: #cbd3db;
+	text-align: center;
+}
+li.onMenuDishes{
+	display: list-item;
+	padding:.1em;
+}
+.alreadyOnMenuClass li p{
+	color: #ff4040;
+	font-style: italic;
+	font-weight: lighter;
+	font-size: 80%
+}
+

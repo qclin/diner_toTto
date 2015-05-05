@@ -108,6 +108,7 @@ var ShowMenuView = Backbone.View.extend({
 		"click button.deleteButton":"deleteMenu", 
 		"click button.editButton":"editMenu", 
 		"click button.updateButton":"updateMenu", 
+		"dblclick span.menuContent h3": "showAdmin",
 	}, 
 	showContent: function(){
 		this.$("span.menuContent").show();
@@ -130,14 +131,19 @@ var ShowMenuView = Backbone.View.extend({
 		this.model.destroy(); 
 		menuRoutes.navigate("#menus", true);
 	}, 
+	showAdmin: function(){
+		console.log("in h3 right now")
+		this.$("div#admin").show();
+	},
 	render: function(){
+		this.$el.attr('id',this.model.id)
 		this.$el.html(this.template({menu: this.model.toJSON()}));
 		return this;
 	}
 });
 
 var AllMenusView = Backbone.View.extend({
-	el:"ul#allMenus", 
+	el:"ul.allMenus", 
 
 	initialize: function(){
 		this.listenTo(this.collection, "sync remove", this.render); 
@@ -152,17 +158,6 @@ var AllMenusView = Backbone.View.extend({
 		}); 
 		return this;
 	}
-
-		/// render this way for individual page/ using a template for list in html
-	// render: function(){
-	// 	var menus = this; 
-	// 	menus.$el.html(""); 
-	// 	menus.$el.prepend('<a href = "/#menus/new" >add a new menu</a>');
-	// 	this.collection.each(function(menu){
-	// 		menus.$el.append(menus.template({menu: menu.toJSON()}));
-	// 	}); 
-	// 	return this; 
-	// }
 });
 
 var CreateMenuView = Backbone.View.extend({
@@ -204,7 +199,69 @@ var CreateMenuView = Backbone.View.extend({
 	}
 });
 
+var addDishToMenuView  = Backbone.View.extend({
+	//tagline:'li',
+	el:'ul#notOnMenu',
+	template: _.template($('#addDishtoMenuForm').html()),
 
+	initialize: function(){
+		this.listenTo(this.collection, "sync change remove"); 
+	}, 
+
+	render: function(){
+		var thisView = this; 	
+		var parent = $('div#contentArea');
+		
+		console.log(this.collection);
+		this.collection.each(function(dish){
+			thisView.$el.append(thisView.template({dish: dish.toJSON()}));
+		}); 
+		
+		var notOn = thisView.$el; 
+		var plate = $('.menuTarget');
+		// let the ul itesm be draggable 
+		$('li', notOn).draggable({});
+		// let the plate be droppable, accepting noOnMenu items
+		plate.droppable({
+			accepting:"div#contentArea > li", 
+			drop:function(event, ui){
+				var dish = ui.draggable
+				dish.hide();
+				var dishId = ui.draggable.attr("id").substr(4);
+  				var plateId = $(this).attr("id").substr(6);
+
+  				addToMenu(dishId, plateId);
+  				console.log(dishId);
+  				console.log(plateId);
+			}
+		});
+
+		// add dish to menu function 
+		function addToMenu(dish, plate){
+			menuDishes.create({menu_id:plate, dish_id: dish});
+		}
+		return this; 
+	}
+});
+
+var ShowDishInMenuView = Backbone.View.extend({
+	tagline:'li', 
+	template:_.template($('#showDishMenuForm').html()),
+	initialize: function(){
+		this.listenTo(this.collection, "sync change remove"); 
+	}, 
+	render:function(){
+		
+		var thisView = this;
+		var parent = $("ul#alreadyOnMenu"+this.collection.models[0].attributes.menu_id);
+		// debugger;
+		parent.html("");
+		this.collection.each(function(dishOn){
+			parent.append(thisView.template({dishOn:dishOn.toJSON()}));
+		});
+		return this;
+	}
+});
 
 
 

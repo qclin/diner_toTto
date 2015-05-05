@@ -94,5 +94,18 @@ var Happen = Backbone.Model.extend({
 
 });
 
+var MenuDish = Backbone.Model.extend({
+	initialize: function(){
+		console.log('menu_dish created'); 
+
+		this.on('change', function(){
+			console.log('menu_dish changed'); 
+		}); 
+	}, 
+	defaults:{
+		menu_id: null, 
+		dish_id: null
+	},
+});
 
 
