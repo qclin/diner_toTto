@@ -1,4 +1,6 @@
 #Diner toTto
+[digital ocean hosting](http://45.55.159.221:3000/)
+
 ![diner plate](http://41.media.tumblr.com/dbad0518fca22d7c53f38400f58579ee/tumblr_njxypsJDBG1th5zr3o1_1280.jpg)
 
 *A single page application for a Diner *
