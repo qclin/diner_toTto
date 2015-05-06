@@ -139,7 +139,7 @@ app.get('/alreadyOnMenu', function(req, res){
 });
 
 /// fetching a list of dishes not on thismenu 
-//GET http://localhost:3000/dishesNotOnMenu?menuID=2
+//GET http://localhost:4567/dishesNotOnMenu?menuID=2
 app.get('/dishesNotOnMenu', function(req, res){
 	console.log("dishesNotOnMenu route " + req.query.menuID);
 	var menuID = req.query.menuID; 
@@ -177,5 +177,5 @@ app.delete('/alreadyOnMenu/:id', function(req,res){
 
 
 
-app.listen(3000);
-console.log('Listening on port 3000');
+app.listen(4567);
+console.log('Listening on port 4567');
