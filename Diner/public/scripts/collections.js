@@ -74,7 +74,9 @@ var NotOnMenuCollection = Backbone.Collection.extend({
 
 		});
 	}
-}); 
+});
+
+
 
 var menuDishes = new MenuDishesCollection();
 var notOnMenu = new NotOnMenuCollection(); 

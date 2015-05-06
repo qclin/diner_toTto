@@ -103,16 +103,18 @@ ul#notOnMenu li{
 	border-style: solid;  
 	border-color: blanchedalmond;
 	color:#3A5F0B;
+	bottom: 3em;
 }
-div.menuTaget{
+/*div.menuTarget{
 	position: relative;
 	width: 26.5em;
 	height: 26.5em;
 	border-color: #ccffcc;
 	text-align: center;
 	vertical-align: middle;
-	boxing-sizing: border-box;
+	box-sizing: border-box;
 	padding:1em;
+	margin: 0;
 }
 div#square:hover{
 	background-color: blanchedalmond;
@@ -126,16 +128,34 @@ div#circle{
 	border-style: solid;
 	border-color: #cbd3db;
 	border-radius: 50%;
-	boxing-sizing: border-box;
 }
-div#innerCircle{
+*/
+/*div#innerCircle{
 	width: 20em;
 	height: 20em;
 	border-width:.2em;
 	border-style: solid;
 	border-color: #ffffff;
 	border-radius: 50%;
-	boxing-sizing: border-box;
+}*/
+span.menuTarget{
+	width: 20em;
+	height: 20em;
+	padding:3em;
+	display: inline-block;
+   	float: left;
+	background-image: url("../images/IMG_2390.JPG");
+	background-size: cover;
+	border-style: solid;
+	border-color: #cbd3db;
+	border-radius: 50%;
+}
+.dishesListed{
+	margin: 5em;
+}
+li.removableDishes{
+	padding: 1em;
+	display: inline;
 }
 .alreadyOnMenuClass{
 	padding: 3em;
@@ -154,4 +174,6 @@ li.onMenuDishes{
 	font-weight: lighter;
 	font-size: 80%
 }
-
+/*.menuTarget{
+	
+}*/

@@ -199,51 +199,6 @@ var CreateMenuView = Backbone.View.extend({
 	}
 });
 
-var addDishToMenuView  = Backbone.View.extend({
-	//tagline:'li',
-	el:'ul#notOnMenu',
-	template: _.template($('#addDishtoMenuForm').html()),
-
-	initialize: function(){
-		this.listenTo(this.collection, "sync change remove"); 
-	}, 
-
-	render: function(){
-		var thisView = this; 	
-		var parent = $('div#contentArea');
-		
-		console.log(this.collection);
-		this.collection.each(function(dish){
-			thisView.$el.append(thisView.template({dish: dish.toJSON()}));
-		}); 
-		
-		var notOn = thisView.$el; 
-		var plate = $('.menuTarget');
-		// let the ul itesm be draggable 
-		$('li', notOn).draggable({});
-		// let the plate be droppable, accepting noOnMenu items
-		plate.droppable({
-			accepting:"div#contentArea > li", 
-			drop:function(event, ui){
-				var dish = ui.draggable
-				dish.hide();
-				var dishId = ui.draggable.attr("id").substr(4);
-  				var plateId = $(this).attr("id").substr(6);
-
-  				addToMenu(dishId, plateId);
-  				console.log(dishId);
-  				console.log(plateId);
-			}
-		});
-
-		// add dish to menu function 
-		function addToMenu(dish, plate){
-			menuDishes.create({menu_id:plate, dish_id: dish});
-		}
-		return this; 
-	}
-});
-
 var ShowDishInMenuView = Backbone.View.extend({
 	tagline:'li', 
 	template:_.template($('#showDishMenuForm').html()),
@@ -263,6 +218,97 @@ var ShowDishInMenuView = Backbone.View.extend({
 	}
 });
 
+var addDishToMenuView  = Backbone.View.extend({
+	//tagline:'li',
+	el:'ul#notOnMenu',
+	template: _.template($('#addDishtoMenuForm').html()),
+
+	initialize: function(){
+		this.listenTo(this.collection, "sync change remove"); 
+	}, 
+
+	render: function(){
+		var thisView = this; 	
+		
+		console.log(this.collection);
+		this.collection.each(function(dish){
+			thisView.$el.append(thisView.template({dish: dish.toJSON()}));
+		}); 
+		
+		var notOn = thisView.$el; 
+		var plate = $('.menuTarget');
+		var plateId = plate.attr("id").substr(5);
+		// let the ul itesm be draggable 
+		$('li', notOn).draggable({
+			// when it is drag, the route changes back to addDish 
+//////////////////////////////lagging here//
+			drag:function(event, ui){
+			menuDishRoutes.navigate('/menus/'+plateId+'/addDish',true);
+			}
+		});
+		// let the plate be droppable, accepting noOnMenu items
+		plate.droppable({
+			accepting:" ul#notOnMenu > li", 
+			drop:function(event, ui){
+				var dish = ui.draggable
+				dish.hide();
+				var dishId = dish.attr("id").substr(4);
+  				//var plateId = $(this).attr("id").substr(5);
+
+  				addToMenu(dishId, plateId);
+  				console.log(dishId);
+  				console.log(plateId);
+  				menuDishRoutes.navigate('/menus/'+plateId+'/dishes',true);
+			}
+		});
+
+		// add dish to menu function 
+		function addToMenu(dish, plate){
+			menuDishes.create({menu_id:plate, dish_id: dish});
+		}
+		return this; 
+	}
+});
+
+var UpdateDishInMenuView = Backbone.View.extend({
+	tagline:'li', 
+	template: _.template($('#editDishMenuForm').html()), 
+	initialize: function(){
+		this.listenTo(this.collection, "sync change remove"); 
+	}, 
+	render: function(){
+		console.log("here son were here")
+		var thisView = this; 
+		var container = $('ul#itemsOnMenu'+ this.collection.models[0].attributes.menu_id);
+		container.html("");
+		
+		this.collection.each(function(dish){
+			container.append(thisView.template({onMenuDish: dish.toJSON()}));
+		});
+		var listedItems = $('ul.dishesListed');
+		// let the items of the container be draggable 
+		$('li', listedItems).draggable({});
+
+		// grabbing our plate for trashing purposes
+		var plate = $('.menuTarget');
+		var plateId = plate.attr("id").substr(5);
+		//seting plate to be droppable 
+		plate.droppable({
+			accepting: "ul.dishesListed > li", 
+			drop: function (event, ui){
+				var dish = ui.draggable;
+				dish.hide();
+				console.log(dish);
+				var dishId = dish.attr("id").substr(4);
+				console.log("dish "+ dishId + "menu "+plateId);
+				//removing from collection . . .is not hitting server route route
+				menuDishes.remove(menuDishes.where({menu_id:plateId, dish_id: dishId}));
+
+			}
+		})
+
+	}
+});
 
 
 

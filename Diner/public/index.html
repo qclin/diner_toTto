@@ -146,6 +146,10 @@
 	<li class = "onMenuDishes" value = "<%= dishOn.id%>"> <%= dishOn.name %> <p> <%= dishOn.texture %><%= dishOn.flavor %></p></li>
 </script> 
 
+<script type="text/template" id = "editDishMenuForm">
+	<li class = "ui-widget-content" id = "dish<%= onMenuDish.id %> "> <%= onMenuDish.name %> </li>
+</script>
+
 <script type = "text/template" id = "showMenu"> 
 	 
 	 <a href= "/#menus/<%= menu.id %>"><img src= '<%= menu.img_url %>'><br></a>
@@ -165,7 +169,7 @@
 		<input type = "text" id = "nMenu_mood<%= menu.id %>"  value= "<%= menu.mood %>">
 		<input type = "text" id = "nMenu_imgUrl<%= menu.id %>"  value= "<%= menu.img_url %>">
 		<button class = "updateButton">Update</button>
-		<a href = "/#menus/<%= menu.id %>/addDish">change dishes</a>
+		<a href = "/#menus/<%= menu.id %>/updateMenuDishes">change dishes</a>
 		<p class ="errorMsg"> </p>
 	</span>
 

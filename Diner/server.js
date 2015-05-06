@@ -134,7 +134,6 @@ app.get('/alreadyOnMenu', function(req, res){
 	var menuID = req.query.menuID; 
 	db.all("SELECT * FROM menu_dishes INNER JOIN dishes ON menu_dishes.dish_id = dishes.id WHERE menu_dishes.menu_id =" + menuID, function(err, onMenu){
 		if(err){ throw err; }
-		console.log(onMenu);
 		res.json(onMenu);
 	});
 });
@@ -164,8 +163,9 @@ app.post('/alreadyOnMenu', function(req, res){
 });
 
 // removing dish from menu 
-app.delete('/menus/:menuID/removeDish', function(req,res){
-	db.run('DELETE FROM menu_dishes WHERE menu_id = ',+ req.params.menuID, function(err){
+app.delete('/alreadyOnMenu', function(req,res){
+	console.log('were in serverside deleting');
+	db.run('DELETE FROM menu_dishes WHERE menu_id = ? AND dish_id = ?', req.body.menu_id, req.body.dish_id, function(err){
 		res.json({deleted: true});
 	});
 });
