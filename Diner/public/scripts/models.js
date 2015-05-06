@@ -102,6 +102,7 @@ var MenuDish = Backbone.Model.extend({
 			console.log('menu_dish changed'); 
 		}); 
 	}, 
+	urlRoot: "/alreadyOnMenu",
 	defaults:{
 		menu_id: null, 
 		dish_id: null

@@ -132,7 +132,7 @@ app.delete('/dishes/:id', function(req, res) {
 // getting all the dishes that are on this menu 
 app.get('/alreadyOnMenu', function(req, res){
 	var menuID = req.query.menuID; 
-	db.all("SELECT * FROM menu_dishes INNER JOIN dishes ON menu_dishes.dish_id = dishes.id WHERE menu_dishes.menu_id =" + menuID, function(err, onMenu){
+	db.all("SELECT menu_dishes.id, dishes.name, menu_dishes.menu_id, dishes.flavor, dishes.texture FROM menu_dishes INNER JOIN dishes ON menu_dishes.dish_id = dishes.id WHERE menu_dishes.menu_id =" + menuID, function(err, onMenu){
 		if(err){ throw err; }
 		res.json(onMenu);
 	});
@@ -148,7 +148,7 @@ app.get('/dishesNotOnMenu', function(req, res){
 		res.json(notOnMenu); 
 	});
 });
-
+ 
 
 // posting dish assignment
 app.post('/alreadyOnMenu', function(req, res){
@@ -163,9 +163,9 @@ app.post('/alreadyOnMenu', function(req, res){
 });
 
 // removing dish from menu 
-app.delete('/alreadyOnMenu', function(req,res){
-	console.log('were in serverside deleting');
-	db.run('DELETE FROM menu_dishes WHERE menu_id = ? AND dish_id = ?', req.body.menu_id, req.body.dish_id, function(err){
+app.delete('/alreadyOnMenu/:id', function(req,res){
+	console.log(req.params.id);
+	db.run('DELETE FROM menu_dishes WHERE id = ?', req.params.id, function(err){
 		res.json({deleted: true});
 	});
 });

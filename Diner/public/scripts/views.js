@@ -206,7 +206,7 @@ var ShowDishInMenuView = Backbone.View.extend({
 		this.listenTo(this.collection, "sync change remove"); 
 	}, 
 	render:function(){
-		
+		//debugger;
 		var thisView = this;
 		var parent = $("ul#alreadyOnMenu"+this.collection.models[0].attributes.menu_id);
 		// debugger;
@@ -224,12 +224,13 @@ var addDishToMenuView  = Backbone.View.extend({
 	template: _.template($('#addDishtoMenuForm').html()),
 
 	initialize: function(){
-		this.listenTo(this.collection, "sync change remove"); 
+		this.listenTo(this.collection, "sync change remove", this.render); 
+		// but also need to listen to the other collecion -- dishes already on the menu 
 	}, 
 
 	render: function(){
 		var thisView = this; 	
-		
+		$('ul#notOnMenu').html("");
 		console.log(this.collection);
 		this.collection.each(function(dish){
 			thisView.$el.append(thisView.template({dish: dish.toJSON()}));
@@ -275,11 +276,12 @@ var UpdateDishInMenuView = Backbone.View.extend({
 	template: _.template($('#editDishMenuForm').html()), 
 	initialize: function(){
 		this.listenTo(this.collection, "sync change remove"); 
+		// but also need to listen to the other collecion -- dishes not on the menu
 	}, 
 	render: function(){
 		console.log("here son were here")
 		var thisView = this; 
-		var container = $('ul#itemsOnMenu'+ this.collection.models[0].attributes.menu_id);
+		var container = $('ul#itemsOnMenu');
 		container.html("");
 		
 		this.collection.each(function(dish){
@@ -299,10 +301,12 @@ var UpdateDishInMenuView = Backbone.View.extend({
 				var dish = ui.draggable;
 				dish.hide();
 				console.log(dish);
-				var dishId = dish.attr("id").substr(4);
+				var dishId = dish.attr("id");
 				console.log("dish "+ dishId + "menu "+plateId);
-				//removing from collection . . .is not hitting server route route
-				menuDishes.remove(menuDishes.where({menu_id:plateId, dish_id: dishId}));
+				console.log(dish);
+				menuDishes.where({id: parseInt(dishId)})[0].destroy();
+
+				//menu_id:parseInt(plateId);
 
 			}
 		})

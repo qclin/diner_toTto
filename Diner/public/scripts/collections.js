@@ -71,7 +71,7 @@ var NotOnMenuCollection = Backbone.Collection.extend({
 
 		});
 		this.on('remove', function(model, collection){
-
+			
 		});
 	}
 });

@@ -85,10 +85,8 @@ var MenuDishRoutes = Backbone.Router.extend({
 			traditional:true, 
 			data:{menuID: menuID}, 
 			success:function(model, response){
-				console.log(menuDishes)
 				var menuShow = $('li#'+menuID);
 				menuShow.html("");
-				console.log(menuShow);
 				$('<ul id = "alreadyOnMenu' + menuID + '" class= "alreadyOnMenuClass">').appendTo(menuShow);
 				new ShowDishInMenuView({collection: menuDishes}).render();
 			}
@@ -99,10 +97,11 @@ var MenuDishRoutes = Backbone.Router.extend({
 			traditional:true, 
 			data:{menuID:menuID}, 
 			success:function(model, response){
+				console.log(menuDishes);
 				main.html("");
 				//main.append('<div id = "square'+menuID+'" class ="menuTarget"><div id = "circle"><div id = "innerCircle"></div></div></div>');
 				main.append('<a href="/#menus/'+menuID+'/addDish"><span id = "plate'+ menuID +'" class="menuTarget"></span></a>')
-				main.append($('<ul id = "itemsOnMenu'+ menuID + '" class = "dishesListed">'));
+				main.append($('<ul id = "itemsOnMenu" class = "dishesListed">'));
 				new UpdateDishInMenuView({collection:menuDishes}).render();
 			}
 		});
@@ -115,10 +114,11 @@ var MenuDishRoutes = Backbone.Router.extend({
 				console.log(notOnMenu);
 				//main.html("");
 				console.log(main.html());
+				$('ul#notOnMenu').remove();
 				main.append($('<ul id = "notOnMenu">'));
 
 				//main.append('<div id = "square'+menuID+'" class ="menuTarget"><div id = "circle"><div id = "innerCircle"></div></div></div>');
-				new addDishToMenuView({collection: notOnMenu}).render();
+				new addDishToMenuView({collection: notOnMenu})
 			}
 		});
 	}

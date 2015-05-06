@@ -147,7 +147,7 @@
 </script> 
 
 <script type="text/template" id = "editDishMenuForm">
-	<li class = "ui-widget-content" id = "dish<%= onMenuDish.id %> "> <%= onMenuDish.name %> </li>
+	<li class = "ui-widget-content" id = "<%= onMenuDish.id %> "> <%= onMenuDish.name %> </li>
 </script>
 
 <script type = "text/template" id = "showMenu"> 
@@ -161,7 +161,7 @@
 	 	<h3><%= menu.tag %></h3>
 	 	is about <%= menu.mood %><br>
 	 	composed by these <br>
-	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishs"> elements </a>
+	 	<a href = "/#menus/<%= menu.id %>/dishes" id = "promptDishes<%= menu.id %>"> elements </a>
 	 </span>
 
 	<span class = "editMenuForm" style = "display:none">
