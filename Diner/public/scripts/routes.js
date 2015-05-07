@@ -118,7 +118,7 @@ var MenuDishRoutes = Backbone.Router.extend({
 				main.append($('<ul id = "notOnMenu">'));
 
 				//main.append('<div id = "square'+menuID+'" class ="menuTarget"><div id = "circle"><div id = "innerCircle"></div></div></div>');
-				new addDishToMenuView({collection: notOnMenu})
+				new addDishToMenuView({collection: notOnMenu}).render();
 			}
 		});
 	}

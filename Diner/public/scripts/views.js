@@ -203,6 +203,7 @@ var ShowDishInMenuView = Backbone.View.extend({
 	tagline:'li', 
 	template:_.template($('#showDishMenuForm').html()),
 	initialize: function(){
+		// DON't LISTEN to this.render here, since you're rendering multiple menulist in one view, it'll start to eat up sibbling menu list and act cannibalistic
 		this.listenTo(this.collection, "sync change remove"); 
 	}, 
 	render:function(){
@@ -224,7 +225,7 @@ var addDishToMenuView  = Backbone.View.extend({
 	template: _.template($('#addDishtoMenuForm').html()),
 
 	initialize: function(){
-		this.listenTo(this.collection, "sync change remove", this.render); 
+		this.listenTo(this.collection, "sync change remove"); 
 		// but also need to listen to the other collecion -- dishes already on the menu 
 	}, 
 
